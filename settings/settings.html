@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrowserLock - Settings</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="settings-container">
+    <!-- Header -->
+    <div class="settings-header">
+      <div class="header-left">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+          <rect x="14" y="30" width="36" height="26" rx="6" fill="#e94560"/>
+          <path d="M22 30V22a10 10 0 0120 0v8" fill="none" stroke="#e94560" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="32" cy="43" r="4" fill="#1a1a2e"/>
+        </svg>
+        <h1>BrowserLock Settings</h1>
+      </div>
+      <div class="save-status" id="saveStatus"></div>
+    </div>
+
+    <!-- Auth Required -->
+    <div id="authOverlay" class="auth-overlay">
+      <div class="auth-card">
+        <h2>Enter Password</h2>
+        <p>Authenticate to access settings</p>
+        <input type="password" id="authPassword" class="settings-input" placeholder="Enter your password" autofocus />
+        <button class="settings-btn settings-btn-primary" id="authBtn">Authenticate</button>
+        <div class="error-message" id="authError"></div>
+      </div>
+    </div>
+
+    <!-- Settings Content -->
+    <div id="settingsContent" class="settings-content hidden">
+
+      <!-- Section: Password -->
+      <section class="settings-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"/></svg>
+          Password
+        </h2>
+        <div class="setting-row">
+          <div class="input-group">
+            <label class="input-label">New Password</label>
+            <input type="password" id="newPassword" class="settings-input" placeholder="Leave blank to keep current" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">Confirm New Password</label>
+            <input type="password" id="confirmNewPassword" class="settings-input" placeholder="Confirm new password" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Security Question -->
+      <section class="settings-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+          Security Question
+        </h2>
+        <div class="setting-row">
+          <div class="input-group">
+            <label class="input-label">Current Question</label>
+            <p class="current-value" id="currentQuestion">-</p>
+          </div>
+          <div class="input-group">
+            <label class="input-label">New Security Question</label>
+            <input type="text" id="newSecurityQuestion" class="settings-input" placeholder="Leave blank to keep current" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">New Security Answer</label>
+            <input type="text" id="newSecurityAnswer" class="settings-input" placeholder="Leave blank to keep current" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Lock Behavior -->
+      <section class="settings-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+          Lock Behavior
+        </h2>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-name">Lock on browser startup</span>
+            <span class="setting-desc">Automatically lock when Firefox opens</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="lockOnStartup" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-name">Auto-lock on idle</span>
+            <span class="setting-desc">Lock browser after period of inactivity</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="autoLockOnIdle" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item" id="idleTimeoutRow">
+          <div class="setting-info">
+            <span class="setting-name">Idle timeout</span>
+            <span class="setting-desc">Minutes of inactivity before locking</span>
+          </div>
+          <select id="idleTimeout" class="settings-select">
+            <option value="1">1 minute</option>
+            <option value="5" selected>5 minutes</option>
+            <option value="10">10 minutes</option>
+            <option value="15">15 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="60">60 minutes</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Section: Security -->
+      <section class="settings-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Security
+        </h2>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-name">Quarantine mode</span>
+            <span class="setting-desc">Lock out after too many failed attempts</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="quarantineEnabled" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-name">Show lock notification</span>
+            <span class="setting-desc">Display a notification when browser is locked</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="showNotification" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-name">Keyboard shortcut (Alt+L)</span>
+            <span class="setting-desc">Lock browser with keyboard shortcut</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="enableShortcut" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-name">Context menu</span>
+            <span class="setting-desc">Show "Lock Browser" in right-click menu</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="enableContextMenu" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Section: URL Whitelist -->
+      <section class="settings-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.26-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.26zm8.814-.569a1 1 0 00-1.415-1.414l-.707.707a1 1 0 101.414 1.415l.708-.708zm-7.071 7.072l.707-.708A1 1 0 003.465 9.12l-.708.707a1 1 0 001.415 1.415zm3.2-5.171a1 1 0 00-1.3 1.3l4 10a1 1 0 001.823.075l1.38-2.759 3.018 3.02a1 1 0 001.414-1.415l-3.019-3.02 2.76-1.379a1 1 0 00-.076-1.822l-10-4z"/></svg>
+          URL Whitelist
+        </h2>
+        <p class="section-desc">URLs that can be accessed without unlocking. Use patterns like <code>*://example.com/*</code></p>
+
+        <div class="whitelist-add">
+          <input type="text" id="whitelistInput" class="settings-input" placeholder="*://example.com/*" />
+          <button class="settings-btn settings-btn-small" id="addWhitelistBtn">Add</button>
+        </div>
+
+        <div class="whitelist-list" id="whitelistList">
+          <p class="empty-list" id="emptyWhitelist">No whitelisted URLs</p>
+        </div>
+      </section>
+
+      <!-- Section: Import / Export -->
+      <section class="settings-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          Import / Export
+        </h2>
+        <div class="btn-row">
+          <button class="settings-btn settings-btn-outline" id="exportBtn">📤 Export Settings</button>
+          <button class="settings-btn settings-btn-outline" id="importBtn">📥 Import Settings</button>
+          <input type="file" id="importFile" accept=".json" class="hidden" />
+        </div>
+      </section>
+
+      <!-- Save Button -->
+      <div class="save-bar">
+        <button class="settings-btn settings-btn-primary save-btn" id="saveBtn">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrowserLock - Locked</title>
+  <link rel="stylesheet" href="lock.css">
+</head>
+<body>
+  <div class="lock-container" id="lockContainer">
+    <!-- Background animated elements -->
+    <div class="bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+
+    <div class="lock-card" id="lockCard">
+      <!-- Lock Icon -->
+      <div class="lock-icon-wrapper">
+        <svg class="lock-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <rect x="14" y="30" width="36" height="26" rx="6" fill="#e94560"/>
+          <path d="M22 30V22a10 10 0 0120 0v8" fill="none" stroke="#e94560" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="32" cy="43" r="4" fill="#1a1a2e"/>
+          <line x1="32" y1="43" x2="32" y2="50" stroke="#1a1a2e" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <h1 class="lock-title">BrowserLock</h1>
+      <p class="lock-subtitle" id="lockSubtitle">Enter your password to unlock</p>
+
+      <!-- Setup Form (shown if not set up yet) -->
+      <div id="setupForm" class="hidden">
+        <h2 style="font-size: 16px; margin-bottom: 6px; color: #fff;">Create Master Password</h2>
+        <p style="font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 16px;">Set a master password to protect your browser.</p>
+        <div class="input-group">
+          <input
+            type="password"
+            id="setupNewPassword"
+            class="lock-input"
+            placeholder="Create password (min 4 chars)"
+            autocomplete="off"
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="password"
+            id="setupConfirmPassword"
+            class="lock-input"
+            placeholder="Confirm password"
+            autocomplete="off"
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="text"
+            id="setupSecurityQuestion"
+            class="lock-input"
+            placeholder="Security Question (e.g. Pet's name?)"
+            autocomplete="off"
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="text"
+            id="setupSecurityAnswer"
+            class="lock-input"
+            placeholder="Security Answer"
+            autocomplete="off"
+          />
+        </div>
+        <button class="lock-btn" id="setupSubmitBtn">Set Password & Lock</button>
+        <div class="error-message" id="setupError"></div>
+      </div>
+
+      <!-- Main unlock form -->
+      <div id="unlockForm">
+        <div class="input-group" id="passwordGroup">
+          <input
+            type="password"
+            id="passwordInput"
+            class="lock-input"
+            placeholder="Enter password"
+            autocomplete="off"
+            autofocus
+          />
+          <button class="toggle-visibility" id="togglePassword" title="Show/Hide password">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+        <button class="lock-btn" id="unlockBtn">Unlock</button>
+        <div class="error-message" id="errorMessage"></div>
+        <a href="#" class="forgot-link" id="forgotLink">Forgot Password?</a>
+      </div>
+
+      <!-- Quarantine message -->
+      <div id="quarantineView" class="hidden">
+        <div class="quarantine-icon">⚠️</div>
+        <h2 class="quarantine-title">Quarantine Mode</h2>
+        <p class="quarantine-message">Too many failed attempts. Browser is locked.</p>
+        <div class="quarantine-timer" id="quarantineTimer">00:00</div>
+        <p class="quarantine-sub">Please wait for the timer to expire.</p>
+      </div>
+
+      <!-- Forgot password / Security question -->
+      <div id="recoveryForm" class="hidden">
+        <h2 class="recovery-title">Password Recovery</h2>
+        <p class="security-question" id="securityQuestionText"></p>
+        <div class="input-group">
+          <input
+            type="text"
+            id="securityAnswer"
+            class="lock-input"
+            placeholder="Your answer"
+            autocomplete="off"
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="password"
+            id="newPassword"
+            class="lock-input"
+            placeholder="New password (min 4 characters)"
+            autocomplete="off"
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="password"
+            id="confirmNewPassword"
+            class="lock-input"
+            placeholder="Confirm new password"
+            autocomplete="off"
+          />
+        </div>
+        <button class="lock-btn" id="resetBtn">Reset Password</button>
+        <div class="error-message" id="recoveryError"></div>
+        <a href="#" class="forgot-link" id="backToLogin">← Back to login</a>
+      </div>
+    </div>
+
+    <div class="lock-footer">
+      <span>🔒 BrowserLock for Firefox</span>
+    </div>
+  </div>
+
+  <script src="../utils/crypto.js"></script>
+  <script src="lock.js"></script>
+</body>
+</html>

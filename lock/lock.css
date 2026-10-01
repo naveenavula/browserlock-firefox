@@ -1,0 +1,328 @@
+/* BrowserLock - Lock Screen Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: #0a0a1a;
+  color: #fff;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  user-select: none;
+}
+
+.lock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%);
+  position: relative;
+}
+
+/* Background animated shapes */
+.bg-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.05;
+}
+
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  background: #e94560;
+  top: -100px;
+  right: -100px;
+  animation: float1 20s ease-in-out infinite;
+}
+
+.shape-2 {
+  width: 300px;
+  height: 300px;
+  background: #0f3460;
+  bottom: -80px;
+  left: -80px;
+  animation: float2 25s ease-in-out infinite;
+}
+
+.shape-3 {
+  width: 200px;
+  height: 200px;
+  background: #e94560;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: float3 15s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-50px, 50px) scale(1.1); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, -30px) scale(1.15); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.03; }
+  50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.07; }
+}
+
+/* Lock Card */
+.lock-card {
+  background: rgba(22, 33, 62, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(233, 69, 96, 0.15);
+  border-radius: 24px;
+  padding: 48px 40px;
+  width: 420px;
+  max-width: 90vw;
+  text-align: center;
+  z-index: 1;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(233, 69, 96, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+/* Lock Icon */
+.lock-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.lock-icon {
+  width: 72px;
+  height: 72px;
+  filter: drop-shadow(0 4px 12px rgba(233, 69, 96, 0.3));
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Typography */
+.lock-title {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff, #e94560);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.lock-subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 32px;
+}
+
+/* Input Group */
+.input-group {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.lock-input {
+  width: 100%;
+  padding: 14px 48px 14px 18px;
+  background: rgba(10, 10, 26, 0.6);
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.lock-input:focus {
+  border-color: #e94560;
+  box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.15);
+}
+
+.lock-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.toggle-visibility:hover {
+  color: #e94560;
+}
+
+.toggle-visibility svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Button */
+.lock-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #e94560, #c23152);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+
+.lock-btn:hover {
+  background: linear-gradient(135deg, #ff5577, #e94560);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(233, 69, 96, 0.3);
+}
+
+.lock-btn:active {
+  transform: translateY(0);
+}
+
+.lock-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error Message */
+.error-message {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin-top: 12px;
+  min-height: 20px;
+  transition: opacity 0.3s;
+}
+
+/* Forgot Link */
+.forgot-link {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  font-size: 13px;
+  margin-top: 16px;
+  transition: color 0.2s;
+}
+
+.forgot-link:hover {
+  color: #e94560;
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+  20%, 40%, 60%, 80% { transform: translateX(8px); }
+}
+
+.shake {
+  animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+/* Quarantine Mode */
+.quarantine-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.quarantine-title {
+  font-size: 22px;
+  color: #ff6b6b;
+  margin-bottom: 8px;
+}
+
+.quarantine-message {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.quarantine-timer {
+  font-size: 48px;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: #e94560;
+  margin-bottom: 12px;
+  letter-spacing: 4px;
+}
+
+.quarantine-sub {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+}
+
+/* Recovery Form */
+.recovery-title {
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.security-question {
+  color: #e94560;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+/* Footer */
+.lock-footer {
+  position: fixed;
+  bottom: 24px;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 12px;
+  z-index: 1;
+}
+
+/* Utility */
+.hidden {
+  display: none !important;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lock-card {
+  animation: fadeIn 0.5s ease-out;
+}

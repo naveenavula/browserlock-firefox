@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrowserLock - Setup</title>
+  <link rel="stylesheet" href="setup.css">
+</head>
+<body>
+  <div class="setup-container">
+    <div class="setup-card">
+      <!-- Logo -->
+      <div class="setup-logo">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+          <rect x="14" y="30" width="36" height="26" rx="6" fill="#e94560"/>
+          <path d="M22 30V22a10 10 0 0120 0v8" fill="none" stroke="#e94560" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="32" cy="43" r="4" fill="#1a1a2e"/>
+          <line x1="32" y1="43" x2="32" y2="50" stroke="#1a1a2e" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <h1 class="setup-title">Welcome to BrowserLock</h1>
+      <p class="setup-subtitle">Set up your password to protect your browser</p>
+
+      <!-- Step Indicator -->
+      <div class="steps-indicator">
+        <div class="step active" id="step1Dot"><span>1</span></div>
+        <div class="step-line"></div>
+        <div class="step" id="step2Dot"><span>2</span></div>
+      </div>
+
+      <!-- Step 1: Password -->
+      <div id="step1" class="setup-step">
+        <h2 class="step-title">Create a Password</h2>
+        <p class="step-desc">Choose a strong password to lock your browser. Minimum 4 characters.</p>
+
+        <div class="input-group">
+          <label class="input-label">Password</label>
+          <input type="password" id="password" class="setup-input" placeholder="Enter password" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Confirm Password</label>
+          <input type="password" id="confirmPassword" class="setup-input" placeholder="Confirm password" />
+        </div>
+
+        <div class="password-strength" id="strengthBar">
+          <div class="strength-fill" id="strengthFill"></div>
+        </div>
+        <p class="strength-text" id="strengthText"></p>
+
+        <div class="error-message" id="step1Error"></div>
+        <button class="setup-btn" id="nextBtn">Next →</button>
+      </div>
+
+      <!-- Step 2: Security Question -->
+      <div id="step2" class="setup-step hidden">
+        <h2 class="step-title">Security Question</h2>
+        <p class="step-desc">Set a security question in case you forget your password.</p>
+
+        <div class="input-group">
+          <label class="input-label">Security Question</label>
+          <select id="securityQuestion" class="setup-input setup-select">
+            <option value="">Select a question...</option>
+            <option value="What is your pet's name?">What is your pet's name?</option>
+            <option value="What city were you born in?">What city were you born in?</option>
+            <option value="What is your favorite movie?">What is your favorite movie?</option>
+            <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+            <option value="What was the name of your first school?">What was the name of your first school?</option>
+            <option value="custom">Custom question...</option>
+          </select>
+        </div>
+
+        <div class="input-group hidden" id="customQuestionGroup">
+          <label class="input-label">Custom Question</label>
+          <input type="text" id="customQuestion" class="setup-input" placeholder="Type your custom question" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Answer</label>
+          <input type="text" id="securityAnswer" class="setup-input" placeholder="Your answer" />
+        </div>
+
+        <div class="error-message" id="step2Error"></div>
+        <div class="btn-group">
+          <button class="setup-btn setup-btn-outline" id="backBtn">← Back</button>
+          <button class="setup-btn" id="completeBtn">Complete Setup</button>
+        </div>
+      </div>
+
+      <!-- Success -->
+      <div id="successView" class="setup-step hidden">
+        <div class="success-icon">✅</div>
+        <h2 class="step-title">Setup Complete!</h2>
+        <p class="step-desc">Your browser is now protected. It will lock automatically.</p>
+        <p class="step-desc" style="margin-top: 8px; color: rgba(255,255,255,0.4);">
+          Use Alt+L or the toolbar icon to lock manually.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="setup.js"></script>
+</body>
+</html>

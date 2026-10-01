@@ -1,0 +1,86 @@
+{
+  "manifest_version": 2,
+  "name": "BrowserLock",
+  "version": "1.0.1",
+  "description": "Lock your Firefox / LibreWolf browser with a password. Protect your privacy and data from unauthorized access.",
+  "author": "BrowserLock",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "browserlock@firefox.extension",
+      "strict_min_version": "57.0"
+    }
+  },
+
+  "permissions": [
+    "tabs",
+    "storage",
+    "idle",
+    "activeTab",
+    "contextMenus",
+    "notifications",
+    "<all_urls>"
+  ],
+
+  "background": {
+    "scripts": ["utils/crypto.js", "background.js"],
+    "persistent": true
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16.svg",
+      "32": "icons/icon-32.svg",
+      "48": "icons/icon-48.svg"
+    },
+    "default_popup": "popup/popup.html",
+    "default_title": "BrowserLock"
+  },
+
+  "options_ui": {
+    "page": "settings/settings.html",
+    "open_in_tab": true
+  },
+
+  "commands": {
+    "lock-browser": {
+      "suggested_key": {
+        "default": "Alt+L"
+      },
+      "description": "Lock the browser"
+    }
+  },
+
+  "icons": {
+    "16": "icons/icon-16.svg",
+    "32": "icons/icon-32.svg",
+    "48": "icons/icon-48.svg",
+    "128": "icons/icon-128.svg"
+  },
+
+  "web_accessible_resources": [
+    "lock/lock.html",
+    "lock/lock.css",
+    "lock/lock.js",
+    "setup/setup.html",
+    "setup/setup.css",
+    "setup/setup.js",
+    "settings/settings.html",
+    "settings/settings.css",
+    "settings/settings.js",
+    "popup/popup.html",
+    "popup/popup.css",
+    "popup/popup.js",
+    "utils/crypto.js",
+    "icons/*.svg"
+  ]
+}
